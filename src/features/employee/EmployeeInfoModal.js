@@ -1,14 +1,10 @@
 import { Box, Button, Modal, Stack } from "@mui/material";
 import React from "react";
 import EmployeeInfoCard from "./EmployeeInfoCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import {
-  deleteEmployee,
-  reactivateEmployee,
-  terminateEmployee,
-} from "./employeeSlice";
+
 import useAuth from "../../hooks/useAuth";
 
 const BoxCard = styled(Box)(() => ({

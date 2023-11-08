@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingScreen from "../../components/LoadingScreen";
 import Breadcrumbs from "../../components/navigation/Breadcrumbs";
