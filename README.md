@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+## Description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple web application for managing leaves, which enables both admin, managers and their team members to efficiently request and oversee their time off. The purpose of this app is to assist individuals and teams in maintaining order and keeping their leave schedules in check.
 
-## Available Scripts
+## Link and Sample account
 
-In the project directory, you can run:
+- App link: https://leave-management-system-hoailinhhhhh.netlify.app
+- Admin account:
 
-### `npm start`
+* Email: admin1@test.com
+* Password: admin1
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Manager account:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Email: manager1@test.com
+* Password: manager1
 
-### `npm test`
+- Manager account:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Email: employee1@test.com
+* Password: employee1
 
-### `npm run build`
+## Quick information
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Each member has specific role
+  - Role system: Employee < Manager - Admin Office
+    -> limit access to certain features
+- Each employee must have 1 manager to be reported to.
+- Manager report to Admin office
+- Member status: pending/active/terminated
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Specific features:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  - Create/Update/Terminate/Delete employee (Admin Office)
+  - Approve/Reject leave request (Manager - Admin Office)
+  - Create leave request (All)
+  - Manage team and leave (Manager - Admin Office)
 
-### `npm run eject`
+- Leave status: pending/approved/rejected
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Criteria to take leave:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - Leave balance of category is availabe.
+  - Leave cannot be applied for previous date.
+  - Leave cannot be applied twice for same day.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## User Stories & Features
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Authentication
 
-## Learn More
+[x] All users can sign in with authorized accounts
+[] New employee can set up new account by using invitation from Admin Office
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Home Page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[x] Employee can only see quick information of their leave
+[x] Manager/Admin Office can see 2 views (one view with their leave information, one view with their team/ company information)
 
-### Code Splitting
+### My Profile
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[x] All users can view their profile
+[x] All users can edit their information + upload avatar
 
-### Analyzing the Bundle Size
+### Employment Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[x] Manager can see list of team's member
+[x] Admin Office can see list of all employee
+[x] Admin Office can add new employee
+[ ] Admin Office can send email invitation to employee to set up new account
+[x] Admin Office can update, terminate, reactivate and delete employee
 
-### Making a Progressive Web App
+### My Leaves
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[x] All users can check their leave balance
+[x] All users can view all their leaves requests submitted
+[x] All users can create leave requests with time, category, reason
+[x] All users can delete/ update their leave requests (only when status is pending)
 
-### Advanced Configuration
+### Leave Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[x] Manager/Admin Office can see the list of pending leave request
+[x] Manager/Admin Office can view team's/employee's leave in calendar view
+[x] Manager/Admin Office can approve/reject incharge person's leave request (in pending requests section and in calendar popup)
 
-### Deployment
+### Notification
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[] Manager/Admin Office can receive emails and in app notification when new request is submitted
+[] Employee can receive emails and in app notification when request is accepted/ rejected
