@@ -1,9 +1,13 @@
 import {
   Box,
+  Drawer,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
   alpha,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -38,22 +42,26 @@ const menuItems2 = [
   { path: "/my-leaves", text: "My Leaves", icon: <BeachAccessOutlinedIcon /> },
 ];
 
-const NavButtonItemList = styled(ListItemButton)(() => ({
+const NavButtonItemList = styled(ListItemButton)(({ theme }) => ({
   borderRadius: "10px",
-  paddingLeft: 20,
   mb: 0.5,
   "&.Mui-selected": {
-    backgroundColor: "primary.main",
+    backgroundColor:
+      theme.palette.mode === "light"
+        ? theme.palette.primary.light
+        : theme.palette.primary.light,
   },
 }));
 
-function SideNav() {
+function SideNav({ handleClose }) {
+  const theme = useTheme();
   const { user } = useAuth();
   const location = useLocation();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleListItemClick = (index) => {
     setSelectedIndex(index);
+    handleClose && handleClose();
   };
 
   const visibleMenuItems = useMemo(() => {
@@ -97,16 +105,22 @@ function SideNav() {
         >
           <ListItemIcon
             sx={{
-              my: "auto",
-              minWidth: !menuItem?.icon ? 18 : 36,
-              color: "primary.dark",
+              justifyContent: "center",
+              minWidth: 30,
+              mx: "auto",
+              color: theme.palette.mode === "light" ? "primary.dark" : "white",
             }}
           >
             {menuItem.icon}
           </ListItemIcon>
+
           <ListItemText
+            sx={{ ml: 1 }}
             primary={menuItem.text}
-            primaryTypographyProps={{ color: "primary.dark", fontWeight: 700 }}
+            primaryTypographyProps={{
+              color: theme.palette.mode === "light" ? "primary.main" : "white",
+              fontWeight: 700,
+            }}
           />
         </NavButtonItemList>
       ))}

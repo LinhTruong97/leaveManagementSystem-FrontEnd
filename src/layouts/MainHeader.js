@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import MenuIcon from "@mui/icons-material/Menu";
 
-import { Avatar, Divider } from "@mui/material";
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { ColorModeContext } from "../theme";
 
-function MainHeader() {
+function MainHeader({ onSideNavToggle }) {
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  const colorMode = useContext(ColorModeContext);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -72,6 +85,18 @@ function MainHeader() {
     <Box>
       <AppBar position="static">
         <Toolbar>
+          {!isMd && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, display: { md: "none" } }}
+              onClick={onSideNavToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography
             variant="h5"
             noWrap
@@ -82,6 +107,13 @@ function MainHeader() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
+          <IconButton onClick={colorMode.toggleColorMode}>
+            {theme.palette.mode === "light" ? (
+              <DarkModeIcon />
+            ) : (
+              <LightModeIcon />
+            )}
+          </IconButton>
           <Box>
             <Avatar
               onClick={handleProfileMenuOpen}

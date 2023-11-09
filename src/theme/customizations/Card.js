@@ -6,6 +6,7 @@ function Card(theme) {
           position: "relative",
           borderRadius: Number(theme.shape.borderRadius) * 2,
           zIndex: 0, // Fix Safari overflow: hidden with border radius
+          // backgroundColor: "red"
         },
       },
     },

@@ -9,7 +9,7 @@ function MyView() {
     useSelector((state) => state.myLeave);
   return (
     <Grid container sx={{ mx: 2, my: 4 }}>
-      <Grid xs={4}>
+      <Grid xs={12} sm={12} md={12} lg={4} xl={4} xxl={4}>
         <TotalCard
           title="Total Applied Days"
           number={totalUsedSum}
@@ -23,7 +23,7 @@ function MyView() {
         />
       </Grid>
 
-      <Grid xs={4}>
+      <Grid xs={12} sm={12} md={12} lg={4} xl={4} xxl={4}>
         <TotalCard
           title="Total Remaining Days"
           number={totalRemainingSum}
@@ -37,7 +37,8 @@ function MyView() {
           }}
         />
       </Grid>
-      <Grid xs={4}>
+
+      <Grid xs={12} sm={12} md={12} lg={4} xl={4} xxl={4}>
         <TotalCard
           title="Total Pending Request"
           number={myPendingCount}
