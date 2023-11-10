@@ -56,7 +56,7 @@ function HomePage() {
       ) : (
         <Box
           sx={{
-            mt: 2,
+            my: 2,
           }}
         >
           <Stack

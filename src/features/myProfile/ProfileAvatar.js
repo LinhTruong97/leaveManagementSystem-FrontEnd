@@ -1,13 +1,26 @@
 import React from "react";
-import { Avatar, Card, CardContent, Typography } from "@mui/material";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { toPascalCase } from "../../utils/stringFormat";
 
 function ProfileAvatar({ user }) {
+  const theme = useTheme();
+  const isXl = useMediaQuery(theme.breakpoints.up("xl"));
+
+  const widthHeightAvatar = isXl ? 250 : 200;
+
   return (
     <Card
       sx={{
         display: "flex",
         justifyContent: "center",
+        alignItems: "center",
         height: "100%",
       }}
     >
@@ -16,14 +29,13 @@ function ProfileAvatar({ user }) {
           alt={user.fullName}
           src={user.avatarUrl}
           sx={{
-            width: 250,
-            height: 250,
-            m: "2rem auto 2rem auto",
+            width: widthHeightAvatar,
+            height: widthHeightAvatar,
           }}
         />
         <Typography
           variant="h4"
-          sx={{ fontWeight: 700, textAlign: "center", mb: 2 }}
+          sx={{ fontWeight: 700, textAlign: "center", my: 2 }}
         >
           {user.userName}
         </Typography>

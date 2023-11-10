@@ -1,14 +1,12 @@
 import React from "react";
 import isString from "lodash/isString";
 import { useDropzone } from "react-dropzone";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, useMediaQuery } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { styled, alpha } from "@mui/material/styles";
+import { styled, alpha, useTheme } from "@mui/material/styles";
 import RejectionFiles from "./RejectionFiles";
 
 const RootStyle = styled("div")(({ theme }) => ({
-  width: 250,
-  height: 250,
   margin: "auto",
   borderRadius: "50%",
   padding: theme.spacing(1),
@@ -62,6 +60,9 @@ function UploadAvatar({ error, file, helperText, sx, ...other }) {
     ...other,
   });
 
+  const theme = useTheme();
+  const isXl = useMediaQuery(theme.breakpoints.up("xl"));
+
   return (
     <>
       <RootStyle
@@ -69,6 +70,9 @@ function UploadAvatar({ error, file, helperText, sx, ...other }) {
           ...((isDragReject || error) && {
             borderColor: "error.light",
           }),
+          width: isXl ? 250 : 200,
+          height: isXl ? 250 : 200,
+          my: 2,
           ...sx,
         }}
       >

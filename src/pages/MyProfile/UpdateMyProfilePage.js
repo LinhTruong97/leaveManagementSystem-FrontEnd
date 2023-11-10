@@ -90,13 +90,18 @@ function UpdateMyProfilePage() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box sx={{ mr: 2, mt: 2 }}>
+        <Box sx={{ my: 2 }}>
           <Breadcrumbs />
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={4}>
-              <Grid item xs={5} sx={{ height: 600 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} xl={5}>
                 <Card
-                  sx={{ py: 12, px: 3, textAlign: "center", height: "100%" }}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
                 >
                   <FUploadAvatar
                     name="avatarUrl"
@@ -107,7 +112,7 @@ function UpdateMyProfilePage() {
                       <Typography
                         variant="caption"
                         sx={{
-                          mt: 2,
+                          my: 2,
                           mx: "auto",
                           display: "block",
                           textAlign: "center",
@@ -122,8 +127,8 @@ function UpdateMyProfilePage() {
                 </Card>
               </Grid>
 
-              <Grid item xs={7} sx={{ height: 600 }}>
-                <Card sx={{ p: 3, height: "100%" }}>
+              <Grid item xs={12} xl={7}>
+                <Card sx={{ height: "100%", p: 3 }}>
                   <Stack spacing={1}>
                     <FormLabel>User Name</FormLabel>
                     <FTextField name="userName" />

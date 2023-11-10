@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Stack } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -23,15 +23,14 @@ function MyProfilePage() {
       ) : (
         <>
           {user && (
-            <Box sx={{ mr: 2, mt: 2 }}>
+            <Box sx={{ my: 2 }}>
               <Breadcrumbs />
-              <Stack direction="row" justifyContent="flex-end"></Stack>
-              <Grid container spacing={4}>
-                <Grid item xs={5} sx={{ height: 500 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} xl={5}>
                   <ProfileAvatar user={user} />
                 </Grid>
-                <Grid item xs={7} sx={{ height: 500 }}>
-                  <ProfileDetailInfo user={user} height="500" />
+                <Grid item xs={12} xl={7}>
+                  <ProfileDetailInfo user={user} />
                 </Grid>
               </Grid>
             </Box>
