@@ -33,8 +33,8 @@ function RequestDetailModal({ onClose }) {
     <Modal
       open={true}
       onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      aria-labelledby="modal-modal-request-leave"
+      aria-describedby="modal-modal-request-leave"
     >
       <BoxCard>
         <RequestDetailCard request={selectedRequest} />

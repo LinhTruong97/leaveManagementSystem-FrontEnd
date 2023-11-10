@@ -21,8 +21,8 @@ function RequestCardModal({ request, open, onClose }) {
     <Modal
       open={open}
       onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      aria-labelledby="modal-modal-request-leave"
+      aria-describedby="modal-modal-request-leave"
     >
       <BoxCard>
         {request.status === "pending" ? (

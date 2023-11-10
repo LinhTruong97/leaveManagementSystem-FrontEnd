@@ -6,8 +6,8 @@ import EmployeeTableNoData from "./EmployeeTableNoData";
 
 function EmployeeTable({ employeeList, handleOpenModal, startNo }) {
   return (
-    <TableContainer sx={{ overflow: "unset" }}>
-      <Table sx={{ minWidth: 800 }}>
+    <TableContainer>
+      <Table>
         <EmployeeTableHead
           headLabel={[
             { id: "no", label: "#" },

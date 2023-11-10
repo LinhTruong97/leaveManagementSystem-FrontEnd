@@ -5,6 +5,8 @@ import {
   InputLabel,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,6 +47,9 @@ function UpdateEmployeeForm({
   reportToEmployeeList,
   selectedReportToEmployee,
 }) {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"));
+
   const { isLoading } = useSelector((state) => state.employee);
 
   const defaultValues = {
@@ -118,13 +123,16 @@ function UpdateEmployeeForm({
               name="email"
               autoComplete="email"
             />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={3}
+              justifyContent="space-between"
+            >
               <FSelect
                 name="role"
                 defaultValue=""
                 sx={{
                   width: "100%",
-                  maxWidth: "150px",
                   alignSelf: "center",
                 }}
                 label="Role"
@@ -139,18 +147,28 @@ function UpdateEmployeeForm({
 
               <FAutocomplete
                 name="reportTo"
-                style={{ width: "60%" }}
+                style={{ width: isSm ? "60%" : "100%" }}
                 options={reportToEmployeeList}
                 label="Report To Employee"
                 defaultValue={selectedReportToEmployee}
               />
-            </Box>
+            </Stack>
 
             <FBasicDatePicker label="Birthday" name="birthday" />
             <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="flex-start"
+              direction={{ xs: "column", sm: "row", md: "column", lg: "row" }}
+              alignItems={{
+                xs: "flex-start",
+                sm: "center",
+                md: "flex-start",
+                lg: "center",
+              }}
+              justifyContent={{
+                xs: "center",
+                sm: "flex-start",
+                md: "center",
+                lg: "flex-start",
+              }}
               spacing={2}
             >
               <InputLabel>Gender</InputLabel>
@@ -186,10 +204,15 @@ function UpdateEmployeeForm({
                 type="submit"
                 variant="contained"
                 loading={isSubmitting || isLoading}
+                sx={{ minWidth: 100 }}
               >
-                Save All
+                Save
               </LoadingButton>
-              <Button variant="contained" onClick={handleCancelClick}>
+              <Button
+                variant="contained"
+                onClick={handleCancelClick}
+                sx={{ minWidth: 100 }}
+              >
                 Cancel
               </Button>
             </Box>

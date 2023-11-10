@@ -7,11 +7,7 @@ export default function EmployeeTableHead({ headLabel }) {
     <TableHead>
       <TableRow>
         {headLabel.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.align || "center"}
-            sx={{ width: headCell.width, minWidth: headCell.minWidth }}
-          >
+          <TableCell key={headCell.id} align={"center"}>
             {headCell.label}
           </TableCell>
         ))}

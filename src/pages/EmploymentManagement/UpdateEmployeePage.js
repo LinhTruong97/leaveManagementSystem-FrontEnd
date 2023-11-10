@@ -1,4 +1,4 @@
-import { Box, Card, Container } from "@mui/material";
+import { Box, Card, Container, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,17 +38,21 @@ function UpdateEmployeePage() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box sx={{ mr: 2, mt: 2 }}>
+        <Box sx={{ my: 2 }}>
           <Breadcrumbs />
-          <Card sx={{ width: "60%", m: "2rem auto", p: 4 }}>
-            {selectedEmployee && (
-              <UpdateEmployeeForm
-                selectedEmployee={selectedEmployee}
-                reportToEmployeeList={reportToEmployeeList}
-                selectedReportToEmployee={selectedReportToEmployee}
-              />
-            )}
-          </Card>
+          <Grid container justifyContent="center">
+            <Grid item xs={12} lg={10} xl={8}>
+              <Card sx={{ width: "100%", m: "2rem auto", p: 4 }}>
+                {selectedEmployee && (
+                  <UpdateEmployeeForm
+                    selectedEmployee={selectedEmployee}
+                    reportToEmployeeList={reportToEmployeeList}
+                    selectedReportToEmployee={selectedReportToEmployee}
+                  />
+                )}
+              </Card>
+            </Grid>
+          </Grid>
         </Box>
       )}
     </Container>

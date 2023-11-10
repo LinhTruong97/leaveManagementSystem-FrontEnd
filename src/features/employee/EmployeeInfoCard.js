@@ -1,4 +1,12 @@
-import { Avatar, Box, Chip, Divider, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Card,
+  Chip,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { toPascalCase } from "../../utils/stringFormat";
 import BadgeIcon from "@mui/icons-material/Badge";
@@ -10,15 +18,13 @@ import { EMPLOYEE_STATUS_COLOR } from "../../variables/constants";
 
 function EmployeeInfoCard({ employee }) {
   return (
-    <Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          columnGap: 5,
-          mb: 4,
-        }}
+    <Card sx={{ width: "100%", p: 2 }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={1}
+        justifyContent="center"
+        alignItems="center"
+        sx={{ m: 2 }}
       >
         <Avatar
           alt={employee.fullName}
@@ -46,8 +52,7 @@ function EmployeeInfoCard({ employee }) {
             />
           </Box>
         </Stack>
-      </Box>
-
+      </Stack>
       <Stack direction="row" spacing={2} sx={{ m: 1 }}>
         <BadgeIcon />
         <Typography>{employee.fullName}</Typography>
@@ -67,7 +72,7 @@ function EmployeeInfoCard({ employee }) {
         <HomeIcon />
         <Typography>{employee.address}</Typography>
       </Stack>
-    </Box>
+    </Card>
   );
 }
 

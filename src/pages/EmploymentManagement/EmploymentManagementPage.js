@@ -150,7 +150,6 @@ function EmploymentManagementPage() {
                 <Box
                   sx={{
                     overflowX: isXl ? "visible" : "scroll",
-                    border: "1px solid #ddd",
                   }}
                 >
                   <EmployeeTable
