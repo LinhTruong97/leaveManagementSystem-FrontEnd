@@ -34,7 +34,14 @@ const formatEventsForCalendar = (events, type) => {
   });
 };
 
-function EventCalendar({ events, localizer = djLocalizer, type, ...props }) {
+function EventCalendar({
+  events,
+  localizer = djLocalizer,
+  type,
+  height,
+  fontSize,
+  ...props
+}) {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -53,6 +60,7 @@ function EventCalendar({ events, localizer = djLocalizer, type, ...props }) {
     return {
       style: {
         backgroundColor: `${theme.palette[backgroundColor].main}`,
+        fontSize: fontSize,
       },
     };
   };
@@ -67,8 +75,32 @@ function EventCalendar({ events, localizer = djLocalizer, type, ...props }) {
     setIsModalOpen(false);
   };
 
+  const colorButton = theme.palette.mode === "dark" ? "white" : "black";
+  const labelFontSize = "25px";
+  const bgOffrange = theme.palette.mode === "dark" ? "#424247" : "#e6e6e6";
+  const bgToday = theme.palette.mode === "dark" ? "#b39dd4" : "#e8e1f2";
+
+  const customButton = `
+  .rbc-toolbar{
+    font-size: ${labelFontSize}
+  }
+  .rbc-btn-group button {
+    color: ${colorButton};
+    margin: 10px
+  }
+  .rbc-header {
+    padding: 0
+  }
+  .rbc-off-range-bg{
+    background: ${bgOffrange}
+  }
+  .rbc-today{
+    background: ${bgToday}
+  }
+`;
   return (
-    <div style={{ height: "600px" }}>
+    <div style={{ height: height }}>
+      <style>{customButton}</style>
       <Calendar
         defaultDate={defaultDate}
         events={formattedEvents}

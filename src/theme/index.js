@@ -74,7 +74,7 @@ const breakpoints = {
     md: 768,
     lg: 1024,
     xl: 1280,
-    xxl: 1536,
+    xxl: 1440,
   },
 };
 
@@ -126,7 +126,7 @@ function ThemeProvider({ children }) {
             },
             background: {
               default: "rgb(40, 36, 61)",
-              paper: "rgb(55, 51, 82)",
+              paper: "rgb(66, 61, 97)",
             },
           },
           breakpoints,

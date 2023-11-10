@@ -1,4 +1,12 @@
-import { Box, Button, Container, Stack, Tab, Tabs } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Tab,
+  Tabs,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +23,13 @@ import {
   getPendingLeave,
 } from "../features/leave/leaveManagement/employeeLeaveSlice";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@emotion/react";
 
 function HomePage() {
   const { user } = useAuth();
   const [currentTab, setCurrentTab] = useState("myView");
+  const theme = useTheme();
+  const isLg = useMediaQuery(theme.breakpoints.up("lg"));
 
   const { isLoading } = useSelector((state) => state.myLeave);
 
@@ -45,11 +56,15 @@ function HomePage() {
       ) : (
         <Box
           sx={{
-            mr: 2,
             mt: 2,
           }}
         >
-          <Stack direction="row" justifyContent="space-between">
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={2}
+          >
             <Tabs value={currentTab} onChange={handleTabChange}>
               <Tab label="My View" value="myView" sx={{ p: 1 }} />
               {(user.role.name === "manager" ||
@@ -66,12 +81,11 @@ function HomePage() {
               onClick={() => {
                 navigate("/my-leaves/apply-leave");
               }}
-              sx={{ height: "50px" }}
+              sx={{ height: isLg ? 50 : 40 }}
             >
-              + Apply New Leave
+              {isLg ? "+ Apply New Leave" : "+ New Leave"}
             </Button>
           </Stack>
-
           {currentTab === "myView" && <MyView />}
           {currentTab === "managementView" && <ManagementView />}
         </Box>

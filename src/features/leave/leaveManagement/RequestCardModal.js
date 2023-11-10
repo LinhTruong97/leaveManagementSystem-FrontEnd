@@ -4,16 +4,16 @@ import PendingRequestCard from "./PendingRequestCard";
 import RequestCard from "./RequestCard";
 import styled from "@emotion/styled";
 
-const BoxCard = styled(Box)(() => ({
+const BoxCard = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { xs: "90%", md: 1000, lg: "500px" },
-  backgroundColor: "#fff",
+  width: { xs: "80%", sm: 700, md: "500px", lg: "500px" },
+  backgroundColor: theme.palette.primary.lighter,
   borderRadius: 10,
   outline: "none",
-  padding: 40,
+  padding: 15,
 }));
 
 function RequestCardModal({ request, open, onClose }) {

@@ -42,7 +42,7 @@ function PendingRequestCard({ request }) {
   };
 
   return (
-    <Card sx={{ width: "250px", m: 2 }}>
+    <Card sx={{ width: "100%" }}>
       <CardHeader
         title={toPascalCase(request.category.name)}
         sx={{
@@ -56,7 +56,12 @@ function PendingRequestCard({ request }) {
         }}
       />
       <CardContent>
-        <Stack direction="row" justifyContent="center" alignItems="center">
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Avatar
             alt={request.requestedUser.fullName}
             src={request.requestedUser.avatarUrl}
@@ -78,11 +83,9 @@ function PendingRequestCard({ request }) {
         <Stack
           direction="row"
           justifyContent="center"
-          spacing={4}
+          spacing={{ xs: 2, sm: 4 }}
           alignItems="flex-start"
-          sx={{
-            my: 2,
-          }}
+          my={{ xs: 0, sm: 2 }}
         >
           <Stack>
             <Typography sx={{ textAlign: "center" }} variant="subtitle2">
@@ -105,7 +108,9 @@ function PendingRequestCard({ request }) {
             <DateBox>{getDay(request.toDate)}</DateBox>
           </Box>
         </Stack>
-        <Box sx={{ border: "1px solid #919EAB", borderRadius: "5px", p: 3 }}>
+        <Box
+          sx={{ border: "1px solid #919EAB", borderRadius: "5px", p: 2, mt: 1 }}
+        >
           <Typography>{request.reason}</Typography>
         </Box>
         <Stack

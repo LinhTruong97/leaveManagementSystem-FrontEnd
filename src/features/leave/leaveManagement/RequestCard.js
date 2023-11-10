@@ -15,7 +15,7 @@ import styled from "@emotion/styled";
 import { toPascalCase } from "../../../utils/stringFormat";
 
 const DateBox = styled(Box)(() => ({
-  border: "1px solid #000",
+  border: "1px solid #919EAB",
   borderRadius: "10px",
   display: "flex",
   justifyContent: "center",
@@ -28,13 +28,26 @@ const DateBox = styled(Box)(() => ({
 
 function RequestCard({ request }) {
   return (
-    <Card sx={{ width: "300px", m: 2 }}>
+    <Card sx={{ width: "100%" }}>
       <CardHeader
         title={toPascalCase(request.category.name)}
-        sx={{ fontSize: 10, textAlign: "center" }}
+        sx={{
+          "& .MuiTypography-root": {
+            fontSize: 20,
+            fontWeight: 600,
+          },
+          textAlign: "center",
+          padding: 0,
+          paddingTop: 2,
+        }}
       />
       <CardContent>
-        <Stack direction="row" justifyContent="center" alignItems="center">
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Avatar
             alt={request.requestedUser.fullName}
             src={request.requestedUser.avatarUrl}
@@ -56,11 +69,9 @@ function RequestCard({ request }) {
         <Stack
           direction="row"
           justifyContent="center"
-          spacing={4}
+          spacing={{ xs: 2, sm: 4 }}
           alignItems="flex-start"
-          sx={{
-            my: 2,
-          }}
+          my={{ xs: 0, sm: 2 }}
         >
           <Stack>
             <Typography sx={{ textAlign: "center" }} variant="subtitle2">
@@ -83,7 +94,7 @@ function RequestCard({ request }) {
             <DateBox>{getDay(request.toDate)}</DateBox>
           </Box>
         </Stack>
-        <Box sx={{ border: "1px solid #000", borderRadius: "5px", p: 3 }}>
+        <Box sx={{ border: "1px solid #919EAB", borderRadius: "5px", p: 3 }}>
           <Typography>{request.reason}</Typography>
         </Box>
       </CardContent>

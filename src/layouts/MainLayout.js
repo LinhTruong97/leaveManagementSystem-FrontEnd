@@ -1,5 +1,5 @@
 import { Drawer, Grid, alpha, useMediaQuery } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MainHeader from "./MainHeader";
 import { Outlet } from "react-router-dom";
 import AlertMsg from "../components/AlertMsg";
@@ -10,7 +10,6 @@ function MainLayout() {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up("md"));
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [fixedHeader, setFixedHeader] = useState(true);
 
   const handleSideNavToggle = () => {
     setOpenDrawer(!openDrawer);

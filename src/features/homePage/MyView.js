@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import TotalCard from "../../components/card/TotalCard";
 import EventCalendar from "../../components/calendar/EventCalendar";
@@ -7,62 +7,43 @@ import { useSelector } from "react-redux";
 function MyView() {
   const { totalUsedSum, totalRemainingSum, fullLeavesrequest, myPendingCount } =
     useSelector((state) => state.myLeave);
+
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Grid container sx={{ mx: 2, my: 4 }}>
-      <Grid xs={12} sm={12} md={12} lg={4} xl={4} xxl={4}>
-        <TotalCard
-          title="Total Applied Days"
-          number={totalUsedSum}
-          sx={{
-            p: 2,
-            m: 2,
-            textAlign: "center",
-            color: "primary.darker",
-            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-          }}
-        />
+    <Grid container sx={{ my: 2 }} justifyContent="center">
+      <Grid item xs={11} sm={10} lg={5} xl={4} sx={{ mb: 2 }}>
+        <TotalCard title="Total Applied Days" number={totalUsedSum} />
       </Grid>
 
-      <Grid xs={12} sm={12} md={12} lg={4} xl={4} xxl={4}>
-        <TotalCard
-          title="Total Remaining Days"
-          number={totalRemainingSum}
-          sx={{
-            p: 2,
-            m: 2,
-
-            textAlign: "center",
-            color: "primary.darker",
-            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-          }}
-        />
+      <Grid item xs={11} sm={10} lg={5} xl={4} sx={{ mb: 2 }}>
+        <TotalCard title="Total Remaining Days" number={totalRemainingSum} />
       </Grid>
 
-      <Grid xs={12} sm={12} md={12} lg={4} xl={4} xxl={4}>
-        <TotalCard
-          title="Total Pending Request"
-          number={myPendingCount}
-          sx={{
-            p: 2,
-            m: 2,
-
-            textAlign: "center",
-            color: "primary.darker",
-            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-          }}
-        />
+      <Grid item xs={11} sm={10} lg={5} xl={4} sx={{ mb: 2 }}>
+        <TotalCard title="Total Pending Request" number={myPendingCount} />
       </Grid>
 
       <Grid
+        item
         xs={12}
         sx={{
-          my: 4,
+          my: 2,
+          mx: 2,
           borderRadius: "10px",
+          bgcolor: theme.palette.background.paper,
           boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
           p: 3,
         }}
       >
-        <EventCalendar events={fullLeavesrequest} type="userView" width="80%" />
+        <EventCalendar
+          events={fullLeavesrequest}
+          type="userView"
+          width="80%"
+          height={isXs ? 400 : 600}
+          fontSize={isXs ? 13 : 18}
+        />
       </Grid>
     </Grid>
   );
