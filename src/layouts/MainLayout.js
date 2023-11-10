@@ -33,7 +33,7 @@ function MainLayout() {
         }}
       >
         {isMd && (
-          <Grid item md={4} xl={3} mt="-40px">
+          <Grid item md={4} lg={3.5} xl={3} mt="-40px">
             <SideNav />
           </Grid>
         )}
@@ -47,7 +47,7 @@ function MainLayout() {
           <SideNav handleClose={handleClose} />
         </Drawer>
 
-        <Grid item xs={12} md={8} xl={9} mt="-40px">
+        <Grid item xs={12} md={8} lg={8.5} xl={9} mt="-40px">
           <Outlet />
         </Grid>
       </Grid>

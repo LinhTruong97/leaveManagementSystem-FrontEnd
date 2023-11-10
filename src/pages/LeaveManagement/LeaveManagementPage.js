@@ -27,7 +27,7 @@ function LeaveManagementPage() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box sx={{ mr: 2, mt: 2 }}>
+        <Box sx={{ my: 2 }}>
           <Breadcrumbs />
           <Card sx={{ mb: 4, p: 3 }}>
             <Typography
