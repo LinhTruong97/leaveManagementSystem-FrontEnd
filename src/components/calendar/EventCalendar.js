@@ -40,6 +40,7 @@ function EventCalendar({
   type,
   height,
   fontSize,
+  minWidth,
   ...props
 }) {
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -79,6 +80,7 @@ function EventCalendar({
   const labelFontSize = "25px";
   const bgOffrange = theme.palette.mode === "dark" ? "#424247" : "#e6e6e6";
   const bgToday = theme.palette.mode === "dark" ? "#b39dd4" : "#e8e1f2";
+  const colorShowmore = theme.palette.mode === "dark" ? "#e8e1f2" : "#5E35B1";
 
   const customButton = `
   .rbc-toolbar{
@@ -97,9 +99,16 @@ function EventCalendar({
   .rbc-today{
     background: ${bgToday}
   }
+  .rbc-show-more{
+    background: transparent;
+    color: ${colorShowmore}
+  }
+  .rbc-row-segment{
+    padding: 4px
+  }
 `;
   return (
-    <div style={{ height: height }}>
+    <div style={{ height: height, minWidth: minWidth }}>
       <style>{customButton}</style>
       <Calendar
         defaultDate={defaultDate}

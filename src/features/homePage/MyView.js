@@ -1,4 +1,4 @@
-import { Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import TotalCard from "../../components/card/TotalCard";
 import EventCalendar from "../../components/calendar/EventCalendar";
@@ -9,7 +9,7 @@ function MyView() {
     useSelector((state) => state.myLeave);
 
   const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+  const isLg = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <Grid container sx={{ my: 2 }} justifyContent="center">
@@ -37,13 +37,19 @@ function MyView() {
           p: 3,
         }}
       >
-        <EventCalendar
-          events={fullLeavesrequest}
-          type="userView"
-          width="80%"
-          height={isXs ? 400 : 600}
-          fontSize={isXs ? 13 : 18}
-        />
+        <Box
+          sx={{
+            overflowX: "auto",
+          }}
+        >
+          <EventCalendar
+            events={fullLeavesrequest}
+            type="userView"
+            height={600}
+            fontSize={isLg ? 17 : 14}
+            minWidth={isLg ? 500 : 400}
+          />
+        </Box>
       </Grid>
     </Grid>
   );

@@ -30,7 +30,7 @@ const DateBox = styled(Box)(() => ({
   fontWeight: 700,
 }));
 
-function PendingRequestCard({ request }) {
+function PendingRequestCard({ request, sx }) {
   const dispatch = useDispatch();
 
   const handleClickApprove = () => {
@@ -42,7 +42,7 @@ function PendingRequestCard({ request }) {
   };
 
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card sx={{ width: "100%", ...sx }}>
       <CardHeader
         title={toPascalCase(request.category.name)}
         sx={{
