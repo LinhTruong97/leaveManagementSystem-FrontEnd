@@ -61,7 +61,7 @@ export default function RequestTableRow({ request, handleOpenModal }) {
           />
         </TableCell>
 
-        <TableCell align="right">
+        <TableCell align="left">
           <IconButton onClick={handleOpenMenu}>
             <MoreVertIcon />
           </IconButton>

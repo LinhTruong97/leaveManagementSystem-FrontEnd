@@ -6,6 +6,7 @@ import {
   Card,
   Container,
   InputLabel,
+  Stack,
   Typography,
   alpha,
 } from "@mui/material";
@@ -74,120 +75,111 @@ function ApplyLeaveForm() {
       ) : (
         <Box>
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Card
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                maxWidth: "500px",
-                m: "auto",
-                p: 3,
-                gap: 2,
-              }}
-            >
-              <Typography variant="h5" textAlign="center">
-                LEAVE REQUEST FORM
-              </Typography>
-              <Box>
-                <InputLabel size="normal" sx={{ mb: 1.5 }}>
-                  Leave Category*
-                </InputLabel>
-                <FSelect
-                  name="categoryName"
-                  defaultValue=""
-                  sx={{ width: "100%", alignSelf: "center" }}
-                  required
-                >
-                  <option key="none" value="">
-                    Please select category
-                  </option>
-
-                  {LEAVE_CATEGORY_OPTIONS.map((option) => (
-                    <option key={option} value={option}>
-                      {toPascalCase(option)}
+            <Card sx={{ width: "100%", m: "2rem auto", p: 4 }}>
+              <Stack spacing={2}>
+                <Typography variant="h5" textAlign="center">
+                  LEAVE REQUEST FORM
+                </Typography>
+                <Stack>
+                  <InputLabel size="normal" sx={{ mb: 1.5 }}>
+                    Leave Category*
+                  </InputLabel>
+                  <FSelect
+                    name="categoryName"
+                    defaultValue=""
+                    sx={{ width: "100%", alignSelf: "center" }}
+                    required
+                  >
+                    <option key="none" value="">
+                      Select category
                     </option>
-                  ))}
-                </FSelect>
-              </Box>
 
-              <Box>
-                <InputLabel size="normal" sx={{ mb: 1.5 }}>
-                  Type Leave*
-                </InputLabel>
-                <FRadioGroup
-                  name="type"
-                  options={["full", "half_morning", "half_afternoon"]}
-                />
-              </Box>
+                    {LEAVE_CATEGORY_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {toPascalCase(option)}
+                      </option>
+                    ))}
+                  </FSelect>
+                </Stack>
 
-              {selectedType === "full" ? (
+                <Stack>
+                  <InputLabel size="normal" sx={{ mb: 1.5 }}>
+                    Type Leave*
+                  </InputLabel>
+                  <FRadioGroup
+                    name="type"
+                    options={["full", "half_morning", "half_afternoon"]}
+                  />
+                </Stack>
+
+                {selectedType === "full" ? (
+                  <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={1}
+                    justifyContent="space-between"
+                  >
+                    <Stack>
+                      <InputLabel size="normal" sx={{ mb: 1.5 }}>
+                        From Date*
+                      </InputLabel>
+                      <FBasicDatePicker name="fromDate" />
+                    </Stack>
+                    {selectedType === "full" && (
+                      <Stack>
+                        <InputLabel size="normal" sx={{ mb: 1.5 }}>
+                          To Date*
+                        </InputLabel>
+                        <FBasicDatePicker name="toDate" />
+                      </Stack>
+                    )}
+                  </Stack>
+                ) : (
+                  <Stack>
+                    <InputLabel size="normal" sx={{ mb: 1.5 }}>
+                      Date*
+                    </InputLabel>
+                    <FBasicDatePicker name="fromDate" />
+                  </Stack>
+                )}
+                <Stack>
+                  <InputLabel size="normal" sx={{ mb: 1.5 }}>
+                    Reason*
+                  </InputLabel>
+                  <FTextField
+                    name="reason"
+                    multiline
+                    fullWidth
+                    rows={2}
+                    placeholder="Type here ..."
+                    sx={{
+                      "& fieldset": {
+                        borderWidth: `1px !important`,
+                        borderColor: alpha("#919EAB", 0.32),
+                      },
+                    }}
+                  />
+                </Stack>
+
                 <Box
                   sx={{
                     display: "flex",
-                    gap: 1,
-                    justifyContent: "space-between",
+                    justifyContent: "center",
+                    gap: 3,
+                    mt: 3,
                   }}
                 >
-                  <Box>
-                    <InputLabel size="normal" sx={{ mb: 1.5 }}>
-                      From Date*
-                    </InputLabel>
-                    <FBasicDatePicker name="fromDate" />
-                  </Box>
-                  {selectedType === "full" && (
-                    <Box>
-                      <InputLabel size="normal" sx={{ mb: 1.5 }}>
-                        To Date*
-                      </InputLabel>
-                      <FBasicDatePicker name="toDate" />
-                    </Box>
-                  )}
+                  <LoadingButton
+                    type="submit"
+                    variant="contained"
+                    loading={isSubmitting || isLoading}
+                  >
+                    Submit
+                  </LoadingButton>
+                  <Button variant="contained" onClick={handleClearClick}>
+                    Clear
+                  </Button>
                 </Box>
-              ) : (
-                <Box>
-                  <InputLabel size="normal" sx={{ mb: 1.5 }}>
-                    Date*
-                  </InputLabel>
-                  <FBasicDatePicker name="fromDate" />
-                </Box>
-              )}
-              <Box>
-                <InputLabel size="normal" sx={{ mb: 1.5 }}>
-                  Reason*
-                </InputLabel>
-                <FTextField
-                  name="reason"
-                  multiline
-                  fullWidth
-                  rows={2}
-                  placeholder="Type here ..."
-                  sx={{
-                    "& fieldset": {
-                      borderWidth: `1px !important`,
-                      borderColor: alpha("#919EAB", 0.32),
-                    },
-                  }}
-                />
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: 3,
-                  mt: 3,
-                }}
-              >
-                <LoadingButton
-                  type="submit"
-                  variant="contained"
-                  loading={isSubmitting || isLoading}
-                >
-                  Submit
-                </LoadingButton>
-                <Button variant="contained" onClick={handleClearClick}>
-                  Clear
-                </Button>
-              </Box>
+              </Stack>
             </Card>
           </FormProvider>
         </Box>

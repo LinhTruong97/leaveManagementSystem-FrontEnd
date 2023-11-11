@@ -6,15 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLeave } from "./myLeaveSlice";
 
-const BoxCard = styled(Box)(() => ({
+const BoxCard = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { xs: "90%", md: 1000 },
-  backgroundColor: "#fff",
+  width: { xs: "80%", sm: 700, md: "500px", lg: "500px" },
+  backgroundColor: theme.palette.primary.lighter,
   borderRadius: 10,
   outline: "none",
+  padding: 20,
 }));
 
 function RequestDetailModal({ onClose }) {
@@ -39,19 +40,24 @@ function RequestDetailModal({ onClose }) {
       <BoxCard>
         <RequestDetailCard request={selectedRequest} />
         <Stack
-          direction="row"
+          direction={{ xs: "column", sm: "row" }}
           spacing={2}
-          sx={{ justifyContent: "center", m: 3 }}
+          sx={{ justifyContent: "center", mt: 2, mx: 2 }}
         >
-          <Button variant="contained" onClick={handleClickUpdate}>
-            Update
-          </Button>
-          <Button variant="contained" onClick={handleClickDelete}>
-            Delete
-          </Button>
-          <Button variant="contained" onClick={onClose}>
-            Close
-          </Button>
+          <Stack direction={{ xs: "row" }} spacing={2}>
+            <Button variant="contained" onClick={handleClickUpdate}>
+              Update
+            </Button>
+            <Button variant="contained" onClick={handleClickDelete}>
+              Delete
+            </Button>
+          </Stack>
+
+          <Stack direction={{ xs: "row" }} justifyContent="center">
+            <Button variant="contained" onClick={onClose}>
+              Close
+            </Button>
+          </Stack>
         </Stack>
       </BoxCard>
     </Modal>

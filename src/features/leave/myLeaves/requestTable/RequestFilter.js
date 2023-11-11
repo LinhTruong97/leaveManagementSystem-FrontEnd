@@ -1,18 +1,25 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import FormProvider from "../../../../components/form/FormProvider";
-import { Box, Button, InputLabel, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputLabel,
+  Stack,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import FSelect from "../../../../components/form/FSelect";
 import {
   LEAVE_CATEGORY_OPTIONS,
   LEAVE_STATUS_OPTIONS,
 } from "../../../../variables/constants";
 import { toPascalCase } from "../../../../utils/stringFormat";
-import { useNavigate } from "react-router-dom";
 
 function RequestFilter({ setFilter }) {
+  const theme = useTheme();
+
   const methods = useForm();
-  const navigate = useNavigate();
 
   const { reset, handleSubmit } = methods;
 
@@ -25,25 +32,19 @@ function RequestFilter({ setFilter }) {
   };
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 2,
-          alignItems: "center",
-          p: 2,
-        }}
+      <Stack
+        direction={{ xs: "column", lg: "row" }}
+        spacing={2}
+        my={1}
+        alignItems="center"
+        justifyContent="center"
       >
-        <Button
-          variant="contained"
-          onClick={() => {
-            navigate("/my-leaves/apply-leave");
-          }}
-          sx={{ my: 1, mx: 2 }}
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1}
+          alignItems="center"
+          justifyContent="space-between"
         >
-          + Apply New Leave
-        </Button>
-        <Stack direction="row" alignItems="center" spacing={2}>
           <InputLabel size="normal">Status</InputLabel>
           <FSelect
             name="status"
@@ -74,14 +75,36 @@ function RequestFilter({ setFilter }) {
               </option>
             ))}
           </FSelect>
-          <Button size="large" variant="outlined" type="submit">
+        </Stack>
+
+        <Stack
+          direction={{ xs: "row" }}
+          spacing={2}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Button
+            size="large"
+            variant={theme.palette.mode === "dark" ? "contained" : "outlined"}
+            type="submit"
+            sx={{
+              color: theme.palette.mode === "dark" ? "white" : "primary.main",
+            }}
+          >
             Search
           </Button>
-          <Button size="large" variant="outlined" onClick={handleClearClick}>
+          <Button
+            size="large"
+            variant={theme.palette.mode === "dark" ? "contained" : "outlined"}
+            sx={{
+              color: theme.palette.mode === "dark" ? "white" : "primary.main",
+            }}
+            onClick={handleClearClick}
+          >
             Clear
           </Button>
         </Stack>
-      </Box>
+      </Stack>
     </FormProvider>
   );
 }

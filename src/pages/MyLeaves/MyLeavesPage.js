@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Card, Container, TablePagination } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Grid,
+  IconButton,
+  Stack,
+  TablePagination,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import {
   clearSelectedLeave,
   getMyLeaveBalance,
@@ -12,12 +23,18 @@ import CategoryBalancePieChart from "../../features/leave/myLeaves/leaveBalance/
 import RequestTable from "../../features/leave/myLeaves/requestTable/RequestTable";
 import RequestFilter from "../../features/leave/myLeaves/requestTable/RequestFilter";
 import RequestDetailModal from "../../features/leave/myLeaves/RequestDetailModal";
+import { useNavigate } from "react-router-dom";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 function MyLeavesPage() {
+  const theme = useTheme();
+  const isXl = useMediaQuery(theme.breakpoints.up("xl"));
+
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(5);
   const [filter, setFilter] = useState({ status: "", category: "" });
   const [openCardModal, setOpenCardModal] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -46,52 +63,95 @@ function MyLeavesPage() {
     setOpenCardModal(true);
   };
 
+  const navigate = useNavigate();
+
+  const handleFilterToggle = () => {
+    setOpenFilter(!openFilter);
+  };
+
   return (
     <Container>
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box sx={{ mr: 2, mt: 2 }}>
+        <Box sx={{ my: 2, mr: 1 }}>
           <Breadcrumbs />
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              rowGap: 4,
-            }}
+          <Grid
+            container
+            spacing={2}
+            alignItems="center"
+            justifyContent="center"
           >
             {leaveBalance?.map((item) => (
-              <CategoryBalancePieChart
-                key={item._id}
-                item={item}
-                title={item.leaveCategory.name}
-                usedValue={item.totalUsed}
-                remainingValue={item.totalRemaining}
-              />
+              <Grid item xs={13} sm={6} md={8} lg={6} xl={4}>
+                <CategoryBalancePieChart
+                  key={item._id}
+                  item={item}
+                  title={item.leaveCategory.name}
+                  usedValue={item.totalUsed}
+                  remainingValue={item.totalRemaining}
+                />
+              </Grid>
             ))}
-          </Box>
 
-          <Card sx={{ pt: 2, my: 2 }}>
-            <RequestFilter setFilter={setFilter} />
-            <RequestTable
-              requests={currentPageLeaveRequest}
-              handleOpenModal={handleOpenModal}
-            />
-            <TablePagination
-              page={page}
-              component="div"
-              count={totalRequests || 0}
-              rowsPerPage={limit}
-              onPageChange={handleChangePage}
-              rowsPerPageOptions={[5, 10, 25]}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Card>
+            <Grid item xs={12}>
+              <Card>
+                <Stack direction="row" justifyContent="space-between">
+                  <Box
+                    sx={{
+                      m: 2,
+                    }}
+                  >
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        navigate("/my-leaves/apply-leave");
+                      }}
+                      sx={{ minWidth: "25%" }}
+                    >
+                      + Apply New Leave
+                    </Button>
+                  </Box>
+                  <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="filter"
+                    sx={{ mr: 2 }}
+                    onClick={handleFilterToggle}
+                  >
+                    <FilterListIcon />
+                  </IconButton>
+                </Stack>
+                {openFilter && <RequestFilter setFilter={setFilter} />}
 
-          {openCardModal && (
-            <RequestDetailModal onClose={() => setOpenCardModal(false)} />
-          )}
+                <Box
+                  sx={{
+                    overflowX: isXl ? "visible" : "scroll",
+                  }}
+                >
+                  <RequestTable
+                    requests={currentPageLeaveRequest}
+                    handleOpenModal={handleOpenModal}
+                  />
+                </Box>
+
+                <TablePagination
+                  page={page}
+                  component="div"
+                  count={totalRequests || 0}
+                  rowsPerPage={limit}
+                  onPageChange={handleChangePage}
+                  rowsPerPageOptions={[5, 10, 25]}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </Card>
+            </Grid>
+
+            {openCardModal && (
+              <RequestDetailModal onClose={() => setOpenCardModal(false)} />
+            )}
+          </Grid>
         </Box>
       )}
     </Container>

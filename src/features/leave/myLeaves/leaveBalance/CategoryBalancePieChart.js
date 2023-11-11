@@ -30,8 +30,8 @@ function CategoryBalancePieChart({ item, title }) {
   return (
     <Card
       sx={{
-        width: 300,
-        height: 300,
+        width: 290,
+        height: 290,
         textAlign: "center",
       }}
     >
@@ -45,7 +45,10 @@ function CategoryBalancePieChart({ item, title }) {
               {
                 label: fData(item.totalUsed) + " Used",
                 value: item.totalUsed,
-                color: theme.palette.pending.dark,
+                color:
+                  theme.palette.mode === "light"
+                    ? theme.palette.pending.dark
+                    : theme.palette.pending.darker,
               },
               {
                 label:

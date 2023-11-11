@@ -40,7 +40,7 @@ const ERROR = {
 const PENDING = {
   lighter: "#DFE3E8",
   light: "#C4CDD5",
-  main: "#637381",
+  main: "#596875",
   dark: "#454F5B",
   darker: "#212B36",
   contrastText: "#FFFFFF",

@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingScreen from "../../components/LoadingScreen";
 import Breadcrumbs from "../../components/navigation/Breadcrumbs";
@@ -36,30 +36,31 @@ function UpdateLeavePage() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <Box sx={{ mr: 2, mt: 2 }}>
+        <Box sx={{ my: 2 }}>
           <Breadcrumbs />
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              rowGap: 4,
-            }}
+          <Grid
+            container
+            spacing={4}
+            alignItems="center"
+            justifyContent="center"
           >
             {leaveBalance?.map((item) => (
-              <CategoryBalancePieChart
-                key={item._id}
-                item={item}
-                title={item.leaveCategory.name}
-                usedValue={item.totalUsed}
-                remainingValue={item.totalRemaining}
-              />
+              <Grid item xs={13} sm={6} md={8} lg={6} xl={4}>
+                <CategoryBalancePieChart
+                  key={item._id}
+                  item={item}
+                  title={item.leaveCategory.name}
+                  usedValue={item.totalUsed}
+                  remainingValue={item.totalRemaining}
+                />
+              </Grid>
             ))}
-          </Box>
-          <Box sx={{ height: 50 }} />
-          {selectedRequest && (
-            <UpdateLeaveForm selectedRequest={selectedRequest} />
-          )}
+            <Grid item xs={12} lg={10} xl={7}>
+              {selectedRequest && (
+                <UpdateLeaveForm selectedRequest={selectedRequest} />
+              )}
+            </Grid>
+          </Grid>
         </Box>
       )}
     </Container>
