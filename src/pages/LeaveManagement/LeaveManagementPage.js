@@ -5,7 +5,6 @@ import {
   Card,
   Container,
   Grid,
-  Stack,
   Typography,
   useMediaQuery,
   useTheme,
@@ -24,11 +23,7 @@ function LeaveManagementPage() {
   const theme = useTheme();
   const isXl = useMediaQuery(theme.breakpoints.up("xl"));
   const isLg = useMediaQuery(theme.breakpoints.up("lg"));
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
-
   const isSm = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { isLoading, pendingRequest, employeeRequest } = useSelector(
     (state) => state.employeeLeave

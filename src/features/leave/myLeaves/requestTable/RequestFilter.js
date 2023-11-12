@@ -1,14 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import FormProvider from "../../../../components/form/FormProvider";
-import {
-  Box,
-  Button,
-  InputLabel,
-  Stack,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Button, InputLabel, Stack, useTheme } from "@mui/material";
 import FSelect from "../../../../components/form/FSelect";
 import {
   LEAVE_CATEGORY_OPTIONS,
