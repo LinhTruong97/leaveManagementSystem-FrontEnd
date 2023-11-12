@@ -3,6 +3,7 @@ import React from "react";
 import PendingRequestCard from "./PendingRequestCard";
 import RequestCard from "./RequestCard";
 import styled from "@emotion/styled";
+import useAuth from "../../../hooks/useAuth";
 
 const BoxCard = styled(Box)(({ theme }) => ({
   position: "absolute",
@@ -17,6 +18,10 @@ const BoxCard = styled(Box)(({ theme }) => ({
 }));
 
 function RequestCardModal({ request, open, onClose }) {
+  const { user } = useAuth();
+  console.log(request);
+  console.log(user);
+
   return (
     <Modal
       open={open}
@@ -25,7 +30,8 @@ function RequestCardModal({ request, open, onClose }) {
       aria-describedby="modal-modal-request-leave"
     >
       <BoxCard>
-        {request.status === "pending" ? (
+        {request.status === "pending" &&
+        request.requestedUser._id !== user._id ? (
           <PendingRequestCard request={request} />
         ) : (
           <RequestCard request={request} />

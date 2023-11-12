@@ -112,6 +112,7 @@ function EmploymentManagementPage() {
                       </Button>
                     </Box>
                   )}
+                  <Box sx={{ flexGrow: 1 }} />
                   <IconButton
                     size="large"
                     edge="start"
