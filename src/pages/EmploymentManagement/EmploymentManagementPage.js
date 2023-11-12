@@ -36,7 +36,7 @@ function EmploymentManagementPage() {
   const { user } = useAuth();
 
   const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const [filter, setFilter] = useState({ fullName: "", status: "", role: "" });
   const [openCardModal, setOpenCardModal] = useState(false);
   const [selectedStatusTab, setSelectedStatusTab] = useState(0);
