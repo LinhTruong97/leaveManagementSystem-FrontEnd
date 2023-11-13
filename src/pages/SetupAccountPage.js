@@ -65,7 +65,7 @@ function SetupAccountPage() {
         password,
       });
       toast.success("Setup Account Successfully");
-      setTimeout(navigate("/auth/login"), 3000);
+      // setTimeout(navigate("/auth/login"), 10000);
     } catch (error) {
       reset();
       setError("responseError", error);
