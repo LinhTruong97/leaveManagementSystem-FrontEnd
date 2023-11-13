@@ -30,7 +30,6 @@ const LoginSchema = Yup.object().shape({
 const defaultValues = {
   email: "",
   password: "",
-  remember: true,
 };
 
 function LoginPage() {
@@ -118,7 +117,6 @@ function LoginPage() {
             }}
           />
         </Stack>
-        <FCheckbox name="remember" label="Remember me" sx={{ mt: 3 }} />
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <LoadingButton
             fullWidth
