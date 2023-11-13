@@ -12,13 +12,14 @@ import { LoadingButton } from "@mui/lab";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-import { Link as RouterLink, useParams } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { FTextField, FormProvider } from "../components/form";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import apiService from "../app/apiService";
+import { toast } from "react-toastify";
 
 const SetupSchema = Yup.object().shape({
   userName: Yup.string().required("userName is required"),
@@ -53,19 +54,18 @@ function SetupAccountPage() {
     setError,
     formState: { errors, isSubmitting },
   } = methods;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
     const { userName, email, password } = data;
     try {
-      const response = await apiService.put(`/auth/setup/${token}`, {
+      await apiService.put(`/auth/setup/${token}`, {
         userName,
         email,
         password,
       });
-      console.log(response);
-      // navigate("/auth/login");
+      toast.success("Setup Account Successfully");
+      navigate("/auth/login");
     } catch (error) {
       reset();
       setError("responseError", error);
