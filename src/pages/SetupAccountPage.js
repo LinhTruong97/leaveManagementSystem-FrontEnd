@@ -12,8 +12,8 @@ import { LoadingButton } from "@mui/lab";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-import { useNavigate, Link as RouterLink, useParams } from "react-router-dom";
-import { FCheckbox, FTextField, FormProvider } from "../components/form";
+import { Link as RouterLink, useParams } from "react-router-dom";
+import { FTextField, FormProvider } from "../components/form";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -53,7 +53,7 @@ function SetupAccountPage() {
     setError,
     formState: { errors, isSubmitting },
   } = methods;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -64,6 +64,7 @@ function SetupAccountPage() {
         email,
         password,
       });
+      console.log(response);
       // navigate("/auth/login");
     } catch (error) {
       reset();
