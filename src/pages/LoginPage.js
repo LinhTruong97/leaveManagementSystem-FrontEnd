@@ -16,7 +16,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { FCheckbox, FormProvider, FTextField } from "../components/form";
+import { FormProvider, FTextField } from "../components/form";
 import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
