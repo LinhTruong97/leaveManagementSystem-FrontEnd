@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import apiService from "../app/apiService";
 import { toast } from "react-toastify";
+import AlertMsg from "../components/AlertMsg";
 
 const SetupSchema = Yup.object().shape({
   userName: Yup.string().required("userName is required"),
@@ -65,7 +66,6 @@ function SetupAccountPage() {
         password,
       });
       toast.success("Setup Account Successfully", {
-        position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
         onClose: () => {
           navigate("/auth/login");
@@ -78,6 +78,7 @@ function SetupAccountPage() {
   };
   return (
     <Container maxWidth="xs">
+      <AlertMsg />
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack alignItems="center" justifyContent="center">
           <Avatar sx={{ m: 2, bgcolor: "primary.main" }}>
