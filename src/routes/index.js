@@ -16,6 +16,7 @@ import UpdateLeavePage from "../pages/MyLeaves/UpdateLeavePage";
 import AddEmployeePage from "../pages/EmploymentManagement/AddEmployeePage";
 import UpdateEmployeePage from "../pages/EmploymentManagement/UpdateEmployeePage";
 import RoleAuth from "./RoleAuth";
+import SetupAccountPage from "../pages/SetupAccountPage";
 
 function Router() {
   return (
@@ -82,6 +83,7 @@ function Router() {
 
       <Route element={<BlankLayout />}>
         <Route path="/auth/login" element={<LoginPage />} />
+        <Route path="/auth/setup/:token" element={<SetupAccountPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
