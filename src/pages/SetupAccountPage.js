@@ -66,7 +66,7 @@ function SetupAccountPage() {
         password,
       });
       toast.success("Setup Account Successfully", {
-        autoClose: 2000,
+        autoClose: 1000,
         onClose: () => {
           navigate("/auth/login");
         },
