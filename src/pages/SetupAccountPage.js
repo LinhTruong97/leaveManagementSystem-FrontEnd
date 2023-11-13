@@ -64,8 +64,13 @@ function SetupAccountPage() {
         email,
         password,
       });
-      navigate("/auth/login");
-      toast.success("Setup Account Successfully. Please sign in");
+      toast.success("Setup Account Successfully", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000,
+        onClose: () => {
+          navigate("/auth/login");
+        },
+      });
     } catch (error) {
       reset();
       setError("responseError", error);
