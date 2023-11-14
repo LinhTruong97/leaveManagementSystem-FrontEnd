@@ -26,7 +26,7 @@ function PieCenterLabel({ children }) {
 
 function CategoryBalancePieChart({ item, title }) {
   const theme = useTheme();
-  const totalRemaining = item.leaveCategory.totalDays - item.totalUsed;
+  const totalRemaining = item.totalAvailable - item.totalUsed;
   return (
     <Card
       sx={{
@@ -52,11 +52,11 @@ function CategoryBalancePieChart({ item, title }) {
               },
               {
                 label:
-                  item.leaveCategory.totalDays <= 0
+                  item.totalAvailable <= 0
                     ? " Unlimited "
                     : fData(totalRemaining) + " Remaining",
                 value:
-                  item.leaveCategory.totalDays === 0 && totalRemaining === 0
+                  item.totalAvailable === 0 && totalRemaining === 0
                     ? 50
                     : totalRemaining,
                 color: theme.palette.primary.light,
@@ -76,9 +76,7 @@ function CategoryBalancePieChart({ item, title }) {
         }}
       >
         <PieCenterLabel>
-          {item.leaveCategory.totalDays
-            ? "Total " + item.leaveCategory.totalDays
-            : "Unlimited"}
+          {item.totalAvailable ? "Total " + item.totalAvailable : "Unlimited"}
         </PieCenterLabel>
       </PieChart>
     </Card>
