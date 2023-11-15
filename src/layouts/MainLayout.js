@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import AlertMsg from "../components/AlertMsg";
 import SideNav from "./SideNav";
 import { useTheme } from "@emotion/react";
+import Notification from "../features/Notification";
 
 function MainLayout() {
   const theme = useTheme();
@@ -23,6 +24,7 @@ function MainLayout() {
     <>
       <MainHeader onSideNavToggle={handleSideNavToggle} />
       <AlertMsg />
+      {/* <Notification /> */}
       <Grid
         container
         spacing={5}

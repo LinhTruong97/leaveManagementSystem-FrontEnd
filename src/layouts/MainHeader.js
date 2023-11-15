@@ -19,6 +19,7 @@ import {
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { ColorModeContext } from "../theme";
+import Notification from "../features/Notification";
 
 function MainHeader({ onSideNavToggle }) {
   const theme = useTheme();
@@ -107,6 +108,7 @@ function MainHeader({ onSideNavToggle }) {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
+          <Notification />
           <IconButton onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "light" ? (
               <DarkModeIcon />
