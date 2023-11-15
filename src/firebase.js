@@ -18,7 +18,10 @@ const messaging = getMessaging(firebaseApp);
 // Request a new FCM token
 export const requestForToken = async () => {
   try {
-    const currentToken = await getToken(messaging);
+    const currentToken = await getToken(messaging, {
+      vapidKey:
+        "BAvW0omK4RbOQNvqeWuWEx4XEmd017kvvLYDxBZBLo9pJ897O2rC06BY3GE1GTyuwQ80eR5HejCZZaHh-1QOhMg",
+    });
     if (currentToken) {
       console.log("Current FCM token:", currentToken);
       return currentToken;
