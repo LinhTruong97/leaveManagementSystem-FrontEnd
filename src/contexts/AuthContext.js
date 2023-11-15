@@ -106,9 +106,11 @@ function AuthProvider({ children }) {
     });
 
     const currentFcmToken = await requestForToken();
-    await apiService.put("/notifications/fcm-token", {
-      fcmToken: currentFcmToken,
-    });
+    if (currentFcmToken) {
+      await apiService.put("/notifications/fcm-token", {
+        fcmToken: currentFcmToken,
+      });
+    }
 
     callback();
   };
