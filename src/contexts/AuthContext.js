@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 import apiService from "../app/apiService";
 import { isValidToken } from "../utils/jwt";
+import { requestForToken } from "../firebase";
 
 const initialState = {
   isInitialized: false,
@@ -103,6 +104,9 @@ function AuthProvider({ children }) {
       type: LOGIN_SUCCESS,
       payload: { user },
     });
+
+    const currentFcmToken = await requestForToken();
+    await apiService.put("/notifications/fcm-token", { currentFcmToken });
 
     callback();
   };

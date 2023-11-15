@@ -11,34 +11,34 @@ const firebaseConfig = {
   measurementId: "G-1YN1HTWT98",
 };
 
-// Handle
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 
-export const requestForToken = () => {
-  return getToken(messaging, {
-    vapidKey:
-      "BAvW0omK4RbOQNvqeWuWEx4XEmd017kvvLYDxBZBLo9pJ897O2rC06BY3GE1GTyuwQ80eR5HejCZZaHh-1QOhMg",
-  })
-    .then((currentToken) => {
-      if (currentToken) {
-        console.log("current token for client: ", currentToken);
-      } else {
-        console.log(
-          "No registration token available. Request permission to generate one."
-        );
-      }
-    })
-    .catch((err) => {
-      console.log("An error occurred while retrieving token. ", err);
-    });
+// Request a new FCM token
+export const requestForToken = async () => {
+  try {
+    const currentToken = await getToken(messaging);
+    if (currentToken) {
+      console.log("Current FCM token:", currentToken);
+      return currentToken;
+    } else {
+      console.log(
+        "No FCM token available. Requesting permission to generate one."
+      );
+    }
+  } catch (error) {
+    console.error("Error retrieving FCM token:", error);
+  }
 };
 
+// Listen for incoming messages
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {
-      console.log("payload", payload);
+      console.log("Received message:", payload);
       resolve(payload);
     });
   });
+
+export { messaging };
