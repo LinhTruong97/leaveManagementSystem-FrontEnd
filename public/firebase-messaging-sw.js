@@ -35,4 +35,6 @@ messaging.onBackgroundMessage(function (payload) {
   };
   // eslint-disable-next-line no-restricted-globals
   self.registration.showNotification(notificationTitle, notificationOptions);
+  // eslint-disable-next-line no-restricted-globals
+  console.log(self.registration);
 });
