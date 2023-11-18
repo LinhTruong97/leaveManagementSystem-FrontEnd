@@ -2,54 +2,52 @@ import React, { useEffect, useState } from "react";
 import {
   Badge,
   Box,
+  Button,
   Divider,
   IconButton,
   List,
   Popover,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import { onMessageListener } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getPendingNotification,
-  getRecentNotification,
-} from "../features/notification/notificationSlice";
+import { getRecentNotification } from "../features/notification/notificationSlice";
 import NotificationItem from "./NotificationItem";
 
 const Notification = () => {
-  const dispatch = useDispatch();
-  const { pendingCount, recentNotifications } = useSelector(
+  const theme = useTheme();
+  console.log(theme);
+  const [open, setOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { pendingCount, notifications, totalPages } = useSelector(
     (state) => state.notification
   );
-  const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRecentNotification());
-    dispatch(getPendingNotification());
-  }, [dispatch]);
-
-  const messageListener = async () => {
-    try {
-      await onMessageListener();
-      dispatch(getPendingNotification());
-    } catch (err) {
-      console.log("Failed to listen for messages:", err);
-    }
-  };
-  messageListener();
+    dispatch(getRecentNotification({ page: currentPage }));
+  }, [dispatch, currentPage]);
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
 
   const handleClose = () => {
-    setOpen(null);
+    setOpen(false);
+    setCurrentPage(1);
+    dispatch(getRecentNotification({ page: 1 }));
   };
 
   const handleMarkAllAsRead = () => {};
+
+  const handleLoadMore = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <div>
@@ -66,26 +64,25 @@ const Notification = () => {
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
+        sx={{ overflowY: "auto" }}
       >
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            py: 2,
+            py: 1,
             px: 2.5,
+            minWidth: "300px",
           }}
         >
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Recent Notifications</Typography>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              You have {pendingCount} unread messages
-            </Typography>
-          </Box>
-
+          <Typography variant="h6">All Notifications</Typography>
           {pendingCount > 0 && (
             <Tooltip title=" Mark all as read">
-              <IconButton color="primary" onClick={handleMarkAllAsRead}>
+              <IconButton
+                color={theme.palette.mode === "light" ? "primary" : "white"}
+                onClick={handleMarkAllAsRead}
+              >
                 <DoneAllIcon />
               </IconButton>
             </Tooltip>
@@ -94,14 +91,40 @@ const Notification = () => {
         <Divider sx={{ borderStyle: "dashed" }} />
 
         <List disablePadding>
-          {recentNotifications &&
-            recentNotifications.map((notification) => (
+          {notifications.length !== 0 ? (
+            notifications.map((notification) => (
               <NotificationItem
                 key={notification._id}
                 notification={notification}
               />
-            ))}
+            ))
+          ) : (
+            <Typography sx={{ textAlign: "center", pt: 1 }} variant="subtitle1">
+              No notification
+            </Typography>
+          )}
         </List>
+        <Divider sx={{ borderStyle: "dashed" }} />
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            py: 1,
+          }}
+        >
+          {currentPage < totalPages && (
+            <Button onClick={handleLoadMore}>
+              <Typography
+                variant="subtitle2"
+                color={theme.palette.mode === "light" ? "primary" : "white"}
+              >
+                Load More
+              </Typography>
+            </Button>
+          )}
+        </Box>
       </Popover>
     </div>
   );

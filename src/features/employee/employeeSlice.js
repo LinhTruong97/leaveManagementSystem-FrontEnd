@@ -81,6 +81,9 @@ const slice = createSlice({
       state.selectedEmployee = null;
       state.selectedReportToEmployee = null;
     },
+    resetStateSuccess(state) {
+      return initialState;
+    },
   },
 });
 
@@ -237,4 +240,8 @@ export const deleteEmployee = (employeeId) => async (dispatch) => {
     dispatch(slice.actions.hasError(error.message));
     toast.error(error.message);
   }
+};
+
+export const resetEmployeeState = () => (dispatch) => {
+  dispatch(slice.actions.resetStateSuccess());
 };

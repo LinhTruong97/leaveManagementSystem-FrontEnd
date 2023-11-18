@@ -36,6 +36,9 @@ const slice = createSlice({
       const updatedUser = action.payload;
       state.updatedProfile = updatedUser;
     },
+    resetStateSuccess(state) {
+      return initialState;
+    },
   },
 });
 
@@ -71,3 +74,7 @@ export const updateUserProfile =
       toast.error(error.message);
     }
   };
+
+export const resetMyProfileState = () => (dispatch) => {
+  dispatch(slice.actions.resetStateSuccess());
+};

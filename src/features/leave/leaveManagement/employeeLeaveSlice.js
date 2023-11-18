@@ -51,6 +51,9 @@ const slice = createSlice({
       state.totalApprovedLeave = action.payload.totalApprovedLeave;
       state.leaveByMonth = action.payload.totalLeaveByMonth;
     },
+    resetStateSuccess(state) {
+      return initialState;
+    },
   },
 });
 
@@ -115,4 +118,8 @@ export const getLeaveByMonth = (year) => async (dispatch) => {
     dispatch(slice.actions.hasError(error.message));
     toast.error(error.message);
   }
+};
+
+export const resetEmployeeLeaveState = () => (dispatch) => {
+  dispatch(slice.actions.resetStateSuccess());
 };

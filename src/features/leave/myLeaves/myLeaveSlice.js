@@ -82,6 +82,9 @@ const slice = createSlice({
       state.error = null;
       state.selectedRequest = null;
     },
+    resetStateSuccess(state) {
+      return initialState;
+    },
   },
 });
 
@@ -222,4 +225,8 @@ export const clearSelectedLeave = () => async (dispatch) => {
     dispatch(slice.actions.hasError(error.message));
     toast.error(error.message);
   }
+};
+
+export const resetMyLeaveState = () => (dispatch) => {
+  dispatch(slice.actions.resetStateSuccess());
 };

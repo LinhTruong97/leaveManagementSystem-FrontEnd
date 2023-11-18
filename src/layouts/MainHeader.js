@@ -20,6 +20,12 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { ColorModeContext } from "../theme";
 import Notification from "../components/Notification";
+import { useDispatch } from "react-redux";
+import { resetNotificationState } from "../features/notification/notificationSlice";
+import { resetMyProfileState } from "../features/myProfile/userSlice";
+import { resetMyLeaveState } from "../features/leave/myLeaves/myLeaveSlice";
+import { resetEmployeeState } from "../features/employee/employeeSlice";
+import { resetEmployeeLeaveState } from "../features/leave/leaveManagement/employeeLeaveSlice";
 
 function MainHeader({ onSideNavToggle }) {
   const theme = useTheme();
@@ -38,10 +44,16 @@ function MainHeader({ onSideNavToggle }) {
     setAnchorEl(null);
   };
 
+  const dispatch = useDispatch();
   const handleLogout = async () => {
     try {
       handleMenuClose();
       await logout(() => {
+        dispatch(resetMyProfileState());
+        dispatch(resetMyLeaveState());
+        dispatch(resetEmployeeState());
+        dispatch(resetEmployeeLeaveState());
+        dispatch(resetNotificationState());
         navigate("/auth/login");
       });
     } catch (error) {
