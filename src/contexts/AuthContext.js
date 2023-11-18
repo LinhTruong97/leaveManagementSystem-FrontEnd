@@ -96,7 +96,12 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async ({ email, password }, callback) => {
-    const response = await apiService.post("/auth/login", { email, password });
+    const currentFcmToken = await requestForToken();
+    const response = await apiService.post("/auth/login", {
+      email,
+      password,
+      currentFcmToken,
+    });
     const { user, accessToken } = response.data;
 
     setSession(accessToken);
@@ -104,13 +109,6 @@ function AuthProvider({ children }) {
       type: LOGIN_SUCCESS,
       payload: { user },
     });
-
-    const currentFcmToken = await requestForToken();
-    if (currentFcmToken) {
-      await apiService.put("/notifications/fcm-token", {
-        fcmToken: currentFcmToken,
-      });
-    }
 
     callback();
   };

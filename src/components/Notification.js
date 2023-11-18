@@ -19,7 +19,6 @@ import NotificationItem from "./NotificationItem";
 
 const Notification = () => {
   const theme = useTheme();
-  console.log(theme);
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
