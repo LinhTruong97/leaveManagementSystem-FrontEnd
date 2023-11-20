@@ -14,13 +14,18 @@ import {
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecentNotification } from "../features/notification/notificationSlice";
+import {
+  getRecentNotification,
+  markReadAllNotifications,
+  markReadNotification,
+} from "../features/notification/notificationSlice";
 import NotificationItem from "./NotificationItem";
 
 const Notification = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [forceRerender, setForceRerender] = useState(false);
 
   const { pendingCount, notifications, totalPages } = useSelector(
     (state) => state.notification
@@ -42,7 +47,14 @@ const Notification = () => {
     dispatch(getRecentNotification({ page: 1 }));
   };
 
-  const handleMarkAllAsRead = () => {};
+  const handleMarkAllAsRead = () => {
+    dispatch(markReadAllNotifications());
+    setForceRerender(true);
+  };
+
+  const handleMarkRead = (notificationId) => {
+    dispatch(markReadNotification(notificationId));
+  };
 
   const handleLoadMore = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -95,6 +107,8 @@ const Notification = () => {
               <NotificationItem
                 key={notification._id}
                 notification={notification}
+                handleMarkRead={handleMarkRead}
+                forceRerender={forceRerender}
               />
             ))
           ) : (

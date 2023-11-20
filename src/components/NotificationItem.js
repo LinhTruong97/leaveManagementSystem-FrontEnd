@@ -6,22 +6,32 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import { fToNow } from "../utils/timeFormat";
 import EmailIcon from "@mui/icons-material/Email";
-function NotificationItem({ notification }) {
+function NotificationItem({ notification, handleMarkRead, forceRerender }) {
   const theme = useTheme();
+  const [isRead, setIsRead] = useState(notification.isRead);
+
+  useEffect(() => {
+    setIsRead(notification.isRead);
+  }, [notification.isRead, forceRerender]);
+
+  const markAsRead = async () => {
+    await handleMarkRead(notification._id);
+    setIsRead(true);
+  };
+
   return (
     <ListItemButton
       sx={{
         py: 1.5,
         px: 2.5,
         mt: "1px",
-        ...(!notification.isRead && {
-          bgcolor: "action.selected",
-        }),
+        bgcolor: isRead ? "default" : "action.selected",
       }}
+      onClick={markAsRead}
     >
       <ListItemAvatar>
         <Avatar
