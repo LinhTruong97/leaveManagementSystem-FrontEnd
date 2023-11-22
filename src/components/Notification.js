@@ -20,6 +20,7 @@ import {
   markReadNotification,
 } from "../features/notification/notificationSlice";
 import NotificationItem from "./NotificationItem";
+import { onMessageListener } from "../firebase";
 
 const Notification = () => {
   const theme = useTheme();
@@ -32,6 +33,16 @@ const Notification = () => {
   );
 
   const dispatch = useDispatch();
+
+  const messageListener = async () => {
+    try {
+      await onMessageListener();
+      dispatch(getRecentNotification({ page: 1 }));
+    } catch (err) {
+      console.log("Failed to listen for messages:", err);
+    }
+  };
+  messageListener();
 
   useEffect(() => {
     dispatch(getRecentNotification({ page: currentPage }));

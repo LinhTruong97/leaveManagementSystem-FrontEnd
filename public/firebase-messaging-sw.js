@@ -1,4 +1,5 @@
 // Scripts for firebase and firebase messaging
+
 // eslint-disable-next-line no-undef
 importScripts(
   "https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"
