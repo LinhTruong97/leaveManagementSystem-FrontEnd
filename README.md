@@ -49,37 +49,49 @@ A simple web application for managing leaves, which enables both admin, managers
 ### Authentication
 
 [x] All users can sign in with authorized accounts
+
 [] New employee can set up new account by using invitation from Admin Office
 
 ### Home Page
 
 [x] Employee can only see quick information of their leave
+
 [x] Manager/Admin Office can see 2 views (one view with their leave information, one view with their team/ company information)
 
 ### My Profile
 
 [x] All users can view their profile
+
 [x] All users can edit their information + upload avatar
 
 ### Employment Management
 
 [x] Manager can see list of team's member
+
 [x] Admin Office can see list of all employee
+
 [x] Admin Office can add new employee
+
 [ ] Admin Office can send email invitation to employee to set up new account
+
 [x] Admin Office can update, terminate, reactivate and delete employee
 
 ### My Leaves
 
 [x] All users can check their leave balance
+
 [x] All users can view all their leaves requests submitted
+
 [x] All users can create leave requests with time, category, reason
+
 [x] All users can delete/ update their leave requests (only when status is pending)
 
 ### Leave Management
 
 [x] Manager/Admin Office can see the list of pending leave request
+
 [x] Manager/Admin Office can view team's/employee's leave in calendar view
+
 [x] Manager/Admin Office can approve/reject incharge person's leave request (in pending requests section and in calendar popup)
 
 ### Notification
