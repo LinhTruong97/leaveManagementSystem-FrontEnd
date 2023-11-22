@@ -114,6 +114,7 @@ function AuthProvider({ children }) {
   };
 
   const logout = async (callback) => {
+    await apiService.delete("/auth/logout");
     setSession(null);
     dispatch({ type: LOGOUT });
     callback();
