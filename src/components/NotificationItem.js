@@ -1,11 +1,8 @@
 import {
   Avatar,
-  IconButton,
   ListItemAvatar,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
-  Stack,
   Typography,
   useTheme,
 } from "@mui/material";
