@@ -2,20 +2,22 @@
 
 A simple web application for managing leaves, which enables both admin, managers and their team members to efficiently request and oversee their time off. The purpose of this app is to assist individuals and teams in maintaining order and keeping their leave schedules in check.
 
-## Link and Sample account
+## Link Deploy
 
-- App link: https://leave-management-system-hoailinhhhhh.netlify.app
-- Admin account:
+App link: https://leave-management-system-hoailinhhhhh.netlify.app
+
+## Sample account
+Admin account:
 
 * Email: admin1@test.com
 * Password: admin1
 
-- Manager account:
+Manager account:
 
 * Email: manager1@test.com
 * Password: manager1
 
-- Manager account:
+Employee account:
 
 * Email: employee1@test.com
 * Password: employee1
@@ -50,7 +52,7 @@ A simple web application for managing leaves, which enables both admin, managers
 
 [x] All users can sign in with authorized accounts
 
-[] New employee can set up new account by using invitation from Admin Office
+[x] New employee can set up new account by using invitation from Admin Office
 
 ### Home Page
 
@@ -72,7 +74,7 @@ A simple web application for managing leaves, which enables both admin, managers
 
 [x] Admin Office can add new employee
 
-[ ] Admin Office can send email invitation to employee to set up new account
+[x] Admin Office can send email invitation to employee to set up new account
 
 [x] Admin Office can update, terminate, reactivate and delete employee
 
@@ -96,5 +98,5 @@ A simple web application for managing leaves, which enables both admin, managers
 
 ### Notification
 
-[] Manager/Admin Office can receive emails and in app notification when new request is submitted
-[] Employee can receive emails and in app notification when request is accepted/ rejected
+[] Manager/Admin Office can receive in app notification when new request is submitted
+[] Employee can receive in app notification when request is accepted/ rejected
