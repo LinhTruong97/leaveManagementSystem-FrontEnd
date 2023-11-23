@@ -34,17 +34,24 @@ const Notification = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const setupMessageListener = async () => {
-      try {
-        await onMessageListener();
-        dispatch(getRecentNotification({ page: 1 }));
-      } catch (err) {
-        console.log("Failed to listen for messages:", err);
-      }
-    };
+  const setupMessageListener = async () => {
+    try {
+      await onMessageListener();
+      dispatch(getRecentNotification({ page: 1 }));
+    } catch (err) {
+      console.log("Failed to listen for messages:", err);
+    }
+  };
+  setupMessageListener();
 
-    setupMessageListener();
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      dispatch(getRecentNotification({ page: 1 }));
+    }, 30000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -123,6 +130,7 @@ const Notification = () => {
                 notification={notification}
                 handleMarkRead={handleMarkRead}
                 forceRerender={forceRerender}
+                setOpen={setOpen}
               />
             ))
           ) : (

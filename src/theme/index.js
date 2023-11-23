@@ -94,6 +94,7 @@ function ThemeProvider({ children }) {
               primary: GREY[800],
               secondary: GREY[600],
               disabled: GREY[500],
+              purple: "#4527A0",
             },
             background: { paper: "#fff", default: "#fff", neutral: GREY[200] },
             action: {
@@ -122,6 +123,7 @@ function ThemeProvider({ children }) {
               primary: GREY[0],
               secondary: GREY[200],
               disabled: GREY[400],
+              purple: "rgb(40, 36, 61)",
               header: "white",
             },
             background: {

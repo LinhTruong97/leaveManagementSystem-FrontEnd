@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   ListItemAvatar,
   ListItemButton,
   ListItemText,
@@ -11,8 +12,14 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import { fToNow } from "../utils/timeFormat";
 import EmailIcon from "@mui/icons-material/Email";
 import CircleIcon from "@mui/icons-material/Circle";
+import { useNavigate } from "react-router-dom";
 
-function NotificationItem({ notification, handleMarkRead, forceRerender }) {
+function NotificationItem({
+  notification,
+  handleMarkRead,
+  forceRerender,
+  setOpen,
+}) {
   const theme = useTheme();
   const [isRead, setIsRead] = useState(notification.isRead);
 
@@ -25,6 +32,26 @@ function NotificationItem({ notification, handleMarkRead, forceRerender }) {
     setIsRead(true);
   };
 
+  const navigate = useNavigate();
+
+  const handleClickNoti = async (notification) => {
+    if (notification.type === "leave_submit") {
+      await markAsRead();
+      navigate("/leave-management");
+      setOpen(false);
+    } else if (
+      notification.type === "leave_approve" ||
+      notification.type === "leave_reject"
+    ) {
+      await markAsRead();
+      navigate("/my-leaves");
+      markAsRead();
+      setOpen(false);
+    } else {
+      setOpen(false);
+    }
+  };
+
   return (
     <ListItemButton
       sx={{
@@ -32,7 +59,9 @@ function NotificationItem({ notification, handleMarkRead, forceRerender }) {
         px: 2.5,
         mt: "1px",
         bgcolor: isRead ? "default" : "action.selected",
+        position: "relative",
       }}
+      onClick={() => handleClickNoti(notification)}
     >
       <ListItemAvatar>
         <Avatar
@@ -62,16 +91,20 @@ function NotificationItem({ notification, handleMarkRead, forceRerender }) {
         }
       />
       {!isRead && (
-        <ListItemButton
-          onClick={markAsRead}
+        <Box
+          component="span"
           sx={{
-            height: "12px",
-            width: "12px",
-            color: "red",
+            position: "absolute",
+            right: 10,
+            top: "50%",
+            height: "14px",
+            width: "14px",
+            color: "purple",
           }}
+          onClick={() => markAsRead()}
         >
           <CircleIcon sx={{ width: "12px" }} />
-        </ListItemButton>
+        </Box>
       )}
     </ListItemButton>
   );
