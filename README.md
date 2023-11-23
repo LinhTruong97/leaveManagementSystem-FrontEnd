@@ -98,5 +98,6 @@ Employee account:
 
 ### Notification
 
-[] Manager/Admin Office can receive in app notification when new request is submitted
-[] Employee can receive in app notification when request is accepted/ rejected
+[x] Manager/Admin Office can receive in app notification when new request is submitted
+
+[x] Employee can receive in app notification when request is accepted/ rejected
