@@ -25,7 +25,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { updateUserProfile } from "../../features/myProfile/userSlice";
-import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const yupSchema = yup.object().shape({
@@ -34,16 +33,15 @@ const yupSchema = yup.object().shape({
 });
 
 function UpdateMyProfilePage() {
-  const { user } = useAuth();
-  const { isLoading } = useSelector((state) => state.myProfile);
+  const { isLoading, updatedProfile } = useSelector((state) => state.myProfile);
 
   const defaultValues = {
-    userName: user?.userName || "",
-    gender: user?.gender || "Other",
-    birthday: user?.birthday || null,
-    phone: user?.phone || "",
-    address: user?.address || "",
-    avatarUrl: user?.avatarUrl || "",
+    userName: updatedProfile?.userName || "",
+    gender: updatedProfile?.gender || "Other",
+    birthday: updatedProfile?.birthday || null,
+    phone: updatedProfile?.phone || "",
+    address: updatedProfile?.address || "",
+    avatarUrl: updatedProfile?.avatarUrl || "",
   };
 
   const methods = useForm({
@@ -77,7 +75,7 @@ function UpdateMyProfilePage() {
   );
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    dispatch(updateUserProfile({ userId: user._id, ...data }));
+    dispatch(updateUserProfile({ userId: updatedProfile._id, ...data }));
     navigate("/my-profile");
   };
   const handleCancelClick = () => {
