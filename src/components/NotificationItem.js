@@ -1,8 +1,11 @@
 import {
   Avatar,
+  IconButton,
   ListItemAvatar,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
+  Stack,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -10,6 +13,8 @@ import React, { useEffect, useState } from "react";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import { fToNow } from "../utils/timeFormat";
 import EmailIcon from "@mui/icons-material/Email";
+import CircleIcon from "@mui/icons-material/Circle";
+
 function NotificationItem({ notification, handleMarkRead, forceRerender }) {
   const theme = useTheme();
   const [isRead, setIsRead] = useState(notification.isRead);
@@ -31,7 +36,6 @@ function NotificationItem({ notification, handleMarkRead, forceRerender }) {
         mt: "1px",
         bgcolor: isRead ? "default" : "action.selected",
       }}
-      onClick={markAsRead}
     >
       <ListItemAvatar>
         <Avatar
@@ -60,6 +64,15 @@ function NotificationItem({ notification, handleMarkRead, forceRerender }) {
           </Typography>
         }
       />
+      <ListItemButton
+        onClick={markAsRead}
+        sx={{
+          height: "12px",
+          width: "12px",
+        }}
+      >
+        <CircleIcon sx={{ width: "12px" }} />
+      </ListItemButton>
     </ListItemButton>
   );
 }
