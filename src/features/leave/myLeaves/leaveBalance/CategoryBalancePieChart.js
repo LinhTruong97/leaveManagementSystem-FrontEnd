@@ -56,8 +56,8 @@ function CategoryBalancePieChart({ item, title }) {
                     ? " Unlimited "
                     : fData(totalRemaining) + " Remaining",
                 value:
-                  item.totalAvailable === 0 && totalRemaining === 0
-                    ? 50
+                  item.totalAvailable === 0 && totalRemaining <= 0
+                    ? 20
                     : totalRemaining,
                 color: theme.palette.primary.light,
               },

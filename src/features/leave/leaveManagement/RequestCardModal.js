@@ -19,8 +19,6 @@ const BoxCard = styled(Box)(({ theme }) => ({
 
 function RequestCardModal({ request, open, onClose }) {
   const { user } = useAuth();
-  console.log(request);
-  console.log(user);
 
   return (
     <Modal

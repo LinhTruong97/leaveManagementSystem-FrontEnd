@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 import apiService from "../app/apiService";
 import { isValidToken } from "../utils/jwt";
+import { requestForToken } from "../firebase";
 
 const initialState = {
   isInitialized: false,
@@ -95,7 +96,12 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async ({ email, password }, callback) => {
-    const response = await apiService.post("/auth/login", { email, password });
+    const currentFcmToken = await requestForToken();
+    const response = await apiService.post("/auth/login", {
+      email,
+      password,
+      currentFcmToken,
+    });
     const { user, accessToken } = response.data;
 
     setSession(accessToken);
@@ -108,6 +114,7 @@ function AuthProvider({ children }) {
   };
 
   const logout = async (callback) => {
+    await apiService.delete("/auth/logout");
     setSession(null);
     dispatch({ type: LOGOUT });
     callback();
