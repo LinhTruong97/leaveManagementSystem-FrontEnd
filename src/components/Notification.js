@@ -34,15 +34,18 @@ const Notification = () => {
 
   const dispatch = useDispatch();
 
-  const messageListener = async () => {
-    try {
-      await onMessageListener();
-      dispatch(getRecentNotification({ page: 1 }));
-    } catch (err) {
-      console.log("Failed to listen for messages:", err);
-    }
-  };
-  messageListener();
+  useEffect(() => {
+    const setupMessageListener = async () => {
+      try {
+        await onMessageListener();
+        dispatch(getRecentNotification({ page: 1 }));
+      } catch (err) {
+        console.log("Failed to listen for messages:", err);
+      }
+    };
+
+    setupMessageListener();
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getRecentNotification({ page: currentPage }));

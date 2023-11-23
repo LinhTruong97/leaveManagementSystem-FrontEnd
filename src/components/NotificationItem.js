@@ -61,15 +61,18 @@ function NotificationItem({ notification, handleMarkRead, forceRerender }) {
           </Typography>
         }
       />
-      <ListItemButton
-        onClick={markAsRead}
-        sx={{
-          height: "12px",
-          width: "12px",
-        }}
-      >
-        <CircleIcon sx={{ width: "12px" }} />
-      </ListItemButton>
+      {!isRead && (
+        <ListItemButton
+          onClick={markAsRead}
+          sx={{
+            height: "12px",
+            width: "12px",
+            color: "red",
+          }}
+        >
+          <CircleIcon sx={{ width: "12px" }} />
+        </ListItemButton>
+      )}
     </ListItemButton>
   );
 }
