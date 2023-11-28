@@ -6,6 +6,10 @@ A simple web application for managing leaves, which enables both admin, managers
 
 App link: https://leave-management-system-hoailinhhhhh.netlify.app
 
+Repo FE: https://github.com/LinhTruong97/leaveManagementSystem-FrontEnd
+
+Repo BE: https://github.com/LinhTruong97/leaveManagementSystem-BackEnd
+
 ## Sample account
 Admin account:
 
