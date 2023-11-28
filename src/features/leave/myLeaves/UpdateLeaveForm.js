@@ -132,14 +132,14 @@ function UpdateLeaveForm({ selectedRequest }) {
                       <InputLabel size="normal" sx={{ mb: 1.5 }}>
                         From Date*
                       </InputLabel>
-                      <FBasicDatePicker name="fromDate" />
+                      <FBasicDatePicker name="fromDate" disablePast />
                     </Stack>
                     {selectedType === "full" && (
                       <Box>
                         <InputLabel size="normal" sx={{ mb: 1.5 }}>
                           To Date*
                         </InputLabel>
-                        <FBasicDatePicker name="toDate" />
+                        <FBasicDatePicker name="toDate" disablePast />
                       </Box>
                     )}
                   </Stack>
@@ -148,7 +148,7 @@ function UpdateLeaveForm({ selectedRequest }) {
                     <InputLabel size="normal" sx={{ mb: 1.5 }}>
                       Date*
                     </InputLabel>
-                    <FBasicDatePicker name="fromDate" />
+                    <FBasicDatePicker name="fromDate" disablePast />
                   </Stack>
                 )}
                 <Stack>
