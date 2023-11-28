@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -24,8 +24,12 @@ import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { updateUserProfile } from "../../features/myProfile/userSlice";
+import {
+  getCurrentUser,
+  updateUserProfile,
+} from "../../features/myProfile/userSlice";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const yupSchema = yup.object().shape({
   userName: yup.string().required("User Name is required"),
@@ -34,14 +38,15 @@ const yupSchema = yup.object().shape({
 
 function UpdateMyProfilePage() {
   const { isLoading, updatedProfile } = useSelector((state) => state.myProfile);
+  const { user } = useAuth();
 
   const defaultValues = {
-    userName: updatedProfile?.userName || "",
-    gender: updatedProfile?.gender || "Other",
-    birthday: updatedProfile?.birthday || null,
-    phone: updatedProfile?.phone || "",
-    address: updatedProfile?.address || "",
-    avatarUrl: updatedProfile?.avatarUrl || "",
+    userName: updatedProfile?.userName || user.userName,
+    gender: updatedProfile?.gender || user.gender,
+    birthday: updatedProfile?.birthday || user.birthday,
+    phone: updatedProfile?.phone || user.phone,
+    address: updatedProfile?.address || user.address,
+    avatarUrl: updatedProfile?.avatarUrl || user.avatarUrl,
   };
 
   const methods = useForm({
@@ -57,6 +62,9 @@ function UpdateMyProfilePage() {
   } = methods;
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   const handleDrop = useCallback(
     (acceptedFiles) => {
