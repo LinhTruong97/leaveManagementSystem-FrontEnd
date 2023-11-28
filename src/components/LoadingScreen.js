@@ -1,7 +1,7 @@
 import { Box, CircularProgress } from "@mui/material";
 import React from "react";
 
-function LoadingScreen() {
+function LoadingScreen({ ...other }) {
   return (
     <Box
       sx={{
@@ -11,6 +11,7 @@ function LoadingScreen() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        ...other,
       }}
     >
       <CircularProgress />

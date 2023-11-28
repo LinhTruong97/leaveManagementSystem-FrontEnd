@@ -50,7 +50,13 @@ function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <Container maxWidth="xl">
+    <Container
+      maxWidth="xl"
+      sx={{
+        position: "relative",
+        minHeight: "600px",
+      }}
+    >
       {isLoading ? (
         <LoadingScreen />
       ) : (

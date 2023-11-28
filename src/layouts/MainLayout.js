@@ -1,4 +1,4 @@
-import { Drawer, Grid, alpha, useMediaQuery } from "@mui/material";
+import { Drawer, Grid, Stack, alpha, useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
 import MainHeader from "./MainHeader";
 import { Outlet } from "react-router-dom";
@@ -20,7 +20,7 @@ function MainLayout() {
   };
 
   return (
-    <>
+    <Stack sx={{ minHeight: "100vh" }}>
       <MainHeader onSideNavToggle={handleSideNavToggle} />
       <AlertMsg />
       <Grid
@@ -51,7 +51,7 @@ function MainLayout() {
           <Outlet />
         </Grid>
       </Grid>
-    </>
+    </Stack>
   );
 }
 

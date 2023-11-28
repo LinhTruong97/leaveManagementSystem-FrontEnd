@@ -34,7 +34,12 @@ function UpdateEmployeePage() {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container
+      sx={{
+        position: "relative",
+        minHeight: "600px",
+      }}
+    >
       {isLoading ? (
         <LoadingScreen />
       ) : (

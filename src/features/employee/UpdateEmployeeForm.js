@@ -87,7 +87,7 @@ function UpdateEmployeeForm({
   };
 
   return (
-    <Container>
+    <Container sx={{ position: "relative" }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (

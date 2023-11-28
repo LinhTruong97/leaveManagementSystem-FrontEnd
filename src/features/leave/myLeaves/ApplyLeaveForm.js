@@ -69,7 +69,7 @@ function ApplyLeaveForm() {
   };
   const selectedType = watch("type");
   return (
-    <Container>
+    <Container sx={{ position: "relative", mt: 2 }}>
       {isLoading ? (
         <LoadingScreen />
       ) : (

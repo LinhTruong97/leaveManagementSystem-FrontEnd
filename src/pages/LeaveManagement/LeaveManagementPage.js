@@ -44,7 +44,12 @@ function LeaveManagementPage() {
     : "170px";
 
   return (
-    <Container>
+    <Container
+      sx={{
+        position: "relative",
+        minHeight: "600px",
+      }}
+    >
       {isLoading ? (
         <LoadingScreen />
       ) : (

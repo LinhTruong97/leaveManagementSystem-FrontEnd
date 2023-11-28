@@ -74,7 +74,12 @@ function AddEmployeePage() {
     reset();
   };
   return (
-    <Container>
+    <Container
+      sx={{
+        position: "relative",
+        minHeight: "600px",
+      }}
+    >
       {isLoading ? (
         <LoadingScreen />
       ) : (
