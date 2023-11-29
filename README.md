@@ -11,20 +11,21 @@ Repo FE: https://github.com/LinhTruong97/leaveManagementSystem-FrontEnd
 Repo BE: https://github.com/LinhTruong97/leaveManagementSystem-BackEnd
 
 ## Sample account
+
 Admin account:
 
-* Email: admin1@test.com
-* Password: admin1
+- Email: admin1@test.com
+- Password: admin1
 
 Manager account:
 
-* Email: manager1@test.com
-* Password: manager1
+- Email: manager1@test.com
+- Password: manager1
 
 Employee account:
 
-* Email: employee1@test.com
-* Password: employee1
+- Email: employee1@test.com
+- Password: employee1
 
 ## Quick information
 
@@ -105,3 +106,63 @@ Employee account:
 [x] Manager/Admin Office can receive in app notification when new request is submitted
 
 [x] Employee can receive in app notification when request is accepted/ rejected
+
+## Setup
+
+### Installation
+
+1. Clone the repository
+
+```
+git clone <repository_url>
+```
+
+2. Navigate to the project directory:
+
+```
+cd <folder_name>
+```
+
+3. Install dependencies:
+
+```
+npm install
+```
+
+### Configuration
+
+Create a .env file to setup enviroment variables
+
+```
+REACT_APP_BACKEND_API = ""
+
+REACT_APP_CLOUDINARY_CLOUD_NAME = ""
+REACT_APP_CLOUDINARY_UPLOAD_PRESET = ""
+
+REACT_APP_FIREBASE_API_KEY =""
+REACT_APP_FIREBASE_AUTH_DOMAIN = ""
+REACT_APP_FIREBASE_PROJECT_ID = ""
+REACT_APP_FIREBASE_STORAGE_BUCKET = ""
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID = ""
+REACT_APP_FIREBASE_APP_ID = ""
+REACT_APP_MEASUREMENT_ID = ""
+REACT_APP_VAPID_KEY = ""
+```
+
+Update your firebase config in firebase-messaging-sw.js file
+
+### Usage
+
+```
+npm start
+```
+
+## Third-party Libraries
+
+- ReactJS
+
+- Redux
+
+- Material UI
+
+- Firebase
